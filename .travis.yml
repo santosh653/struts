@@ -1,3 +1,6 @@
+arch:
+  - amd64
+  - ppc64le
 dist: trusty
 language: java
 sudo: false
@@ -15,7 +18,10 @@ matrix:
     include:
        - jdk: oraclejdk8
          env: STRUTS_IT=true # do integration tests and coverage reports when jdk7,9 and 11 tests prospered
-
+         arch: amd64
+       - jdk: oraclejdk8
+         env: STRUTS_IT=true # do integration tests and coverage reports when jdk7,9 and 11 tests prospered
+         arch: ppc64le
 script:
    - if [ "$STRUTS_IT" == "true" ]; then
       ./mvnw clean verify org.jacoco:jacoco-maven-plugin:report org.jacoco:jacoco-maven-plugin:report-integration org.eluder.coveralls:coveralls-maven-plugin:report -Ptravis-coveralls -DskipAssembly -B;
