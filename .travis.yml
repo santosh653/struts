@@ -9,18 +9,26 @@ sudo: false
 jdk:
   - oraclejdk9
   - oraclejdk11
+jobs:
+ exclude:
+  - jdk: oraclejdk9
+    arch: ppc64le
+  - jdk: oraclejdk11
+    arch: ppc64le 
 
 install: true
-
+ 
 env:
 global:
   - secure: iI7IpfDtS+LUyS2yNuRCR3KelNyvBHuoMQ3gb1UNmR5SSL7jO/p3olQWrQROs28FJ+dpE3lHyIjoHrebKQGJHHAgTG2XWxn+G3fDsf+wSSFSLoDGj0o2SgGXooBbR2dccnNZHCyQaOyE2cIPWaOxrQZFE4No70LQB4mrP/gdkoc=
 matrix:
     include:
-       - jdk: oraclejdk8
+    #changing to oraclejdk9 as oraclejdk8 is not supported on Intel
+       - jdk: oraclejdk9 
          env: STRUTS_IT=true # do integration tests and coverage reports when jdk7,9 and 11 tests prospered
          arch: amd64
-       - jdk: oraclejdk8
+    #Changing to openjdk8 as oraclejdk8 is not supported on power 
+       - jdk: openjdk8
          env: STRUTS_IT=true # do integration tests and coverage reports when jdk7,9 and 11 tests prospered
          arch: ppc64le
 script:
